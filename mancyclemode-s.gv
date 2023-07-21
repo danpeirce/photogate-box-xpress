@@ -1,0 +1,55 @@
+digraph finite_state_machine {
+        //rankdir=LR;
+        overlap=false;
+        splines="true";
+        size="8,10"
+        graph [ranksep="0.525", nodesep="0.5"];
+        //start [shape=point, xlabel=<Take points at top and<br /> bottom as same point.>];
+	    end1 [shape=point, pos = "0, 3.8!"];
+	    end2 [shape=point, pos = "3.46, 2!"];
+	    end3 [shape=point, pos = "3.46, -2!"];
+	    end4 [shape=point, pos = "0, -3.8!"];
+	    end5 [shape=point, pos = "-3.46, -2!"];
+	    end6 [shape=point, pos = "-3.0, 2.6!"];
+         
+        //node [shape = circle];
+        defaultS [ pos = "0,2.5!", shape = circle, height = "1.8"];
+        modesS [ pos = "0,0!" , shape = circle, height = "2.2"];
+        stopwatchS [ pos = "2.6, 1.5!" , shape = circle ];
+        pulseS [ pos = "2.6, -1.5!", shape = circle, height = "1.8"];
+        pendulumS [ pos = "0, -3!", shape = circle];
+        gateS [ pos = "-2.6, -1.5!" , shape = circle, height = "1.8"];
+        picketfence1S [ pos = "-2.6, 1.5!", shape = circle];
+        cycleTimesS [ shape = circle, height = "1.8"]
+        
+        defaultS -> modesS;
+        modesS -> stopwatchS [ label = "Sel SW"];
+        
+        //[ xlabel = <modeS cycle options in display<br />using cycle SW<br />Select option with Mode Select Switch> ]
+        
+        
+        stopwatchS -> end2 [ label = <Reset SW> ]
+        end1 -> defaultS;
+        modesS -> pulseS [ label = <Sel SW> ]
+        pulseS -> modesS [ label = <Single Run<br />Done> ]
+        pulseS -> end3 [ label = <Reset SW> ]
+        modesS -> pendulumS [ label = <Sel<br />SW> ]
+        pendulumS -> modesS [ label = <Single<br />Run<br />Done>  ]
+        pendulumS -> end4 [ label = "Reset SW" ]
+        modesS -> gateS [ label = <Sel<br /> SW> ]
+        gateS -> modesS [ label = <Single <br />Run<br />Done> ]
+        gateS -> end5 [ label = "Reset SW" ]
+        modesS -> picketfence1S [ label = "Sel SW" ]
+        picketfence1S -> end6 [ label = "Reset SW" ]
+        picketfence1S -> cycleTimesS [ label = <All <br />Edges <br /> Detected> ]
+        cycleTimesS -> picketfence1S [ label = <Sel<br />SW> ]
+        end5 -> end4;
+        end2 -> end1;
+        end4 -> end3;
+        end3 -> end2;
+        end6 -> end1
+}
+
+/*
+neato -Tpng mancyclemode-s.gv -o image/mancyclemode-s.png
+*/

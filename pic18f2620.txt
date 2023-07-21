@@ -1,0 +1,19 @@
+                          +-------+
+MCLR/VPP *                |1    28| PGD*
+RA0/AN0                   |2    27| PGC*
+RA1/AN1                   |3    26| RB5/KBI1/PGM
+RA2/AN2/VREF-/CVREF       |4    25| RB4/KBI0/AN11
+RA3/AN3/VREF+             |5    24| CCP2 (photogate2)*
+RA4/T0CKI/C1OUT           |6    23| RB2/INT2/AN8
+RA5/AN4/SS/HLVDIN/C2OUT   |7    22| RB1/INT1/AN10
+VSS                       |8    21| RB0/INT0/FLT0/AN12
+OSC1/CLKI/RA7             |9    20| VDD
+OSC2/CLKO/RA6             |10   19| VSS
+RC0/T1OSO/T13CKI          |11   18| RX*
+RC1/T1OSI                 |12   17| TX*
+CCP1 (photogate1)*        |13   16| RC5/SDO
+RC3* (ModeSel/Start/Stop) |14   15| RC4* (Mode Reset)
+                          +-------+
+                          
+     * function of this pin is set (other pins have future options shown)
+     

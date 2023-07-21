@@ -1,0 +1,47 @@
+digraph finite_state_machine {
+        //rankdir=LR;
+        overlap=false;
+        //splines="true";
+        //size="8,10"
+        //graph [ranksep="0.525", nodesep="0.5"];
+        start [shape=point, xlabel=<Take points at top and<br /> bottom as same point.>];
+	    end [shape=point, xlabel = "same point as one at top"];
+	    
+        subgraph cluster_mode {
+                 //rankdir=TB;
+                 node [shape = circle];
+                 op1 -> op2  [ label = "Cycle SW" ];
+                 op2 -> op3  [ label = "Cycle SW" ];
+                 op3 -> op4  [ label = "Cycle SW" ];
+                 op4 -> op5  [ label = "Cycle SW" ];
+                 op5 -> op1  [ label = "Cycle SW" ];
+                 label = "modeS";
+                 
+        } 
+        //node [shape = circle];
+        start -> defaultS
+        defaultS -> op1 [xlabel = <modeS cycle options in display<br />using cycle SW<br />Select option with Mode Select Switch> ];
+        
+        
+        op1 -> stopwatchS [ label = "Sel SW"]
+        stopwatchS -> end [ label = "Reset SW" ]
+        op2 -> pulseS [ label = "Sel SW" ]
+        pulseS -> op2 [ label = <Single Run<br />Done> ]
+        pulseS -> end [ label = "Reset SW" ]
+        op3 -> pendulumS [ label = "Sel SW" ]
+        pendulumS -> op3 [ label = <Single Run<br />Done>  ]
+        pendulumS -> end [ label = "Reset SW" ]
+        op4 -> gateS [ label = "Sel SW" ]
+        gateS -> op4 [ label = <Single Run<br />Done> ]
+        gateS -> end [ label = "Reset SW" ]
+        op5 -> picketfence1S [ label = "Sel SW" ]
+        picketfence1S -> end [ label = "Reset SW" ]
+        picketfence1S -> cycleTimesS [ label = "All Edges Detected" ]
+        cycleTimesS -> picketfence1S [ label = "Sel SW" ]
+        
+        
+}
+
+/*
+dot -Tpng mancyclemode.gv -o image/mancyclemode.png
+*/
